@@ -1,300 +1,93 @@
+<div align="center">
+  <img src="assets/logo.png" alt="NerA-MCP Logo" width="250" />
+</div>
 
+# NerA-MCP: The Arabic Intelligence Layer
+
+
+[![Docker](https://img.shields.io/badge/docker-ready-brightgreen.svg)](https://hub.docker.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+**NerA-MCP** (Middle-East Network Architecture - Model Context Protocol) is a senior-engineered intelligence layer designed to bridge the gap between global Large Language Models (LLMs) and the complex linguistic, legal, and cultural nuances of the Arabic-speaking world.
 
 ---
 
-# **NerA-MCP**
+## 🚀 Core Value Proposition
 
-### A Middle-East–native Model Context Protocol for Arabic-first AI systems
+While global models have improved in basic Arabic processing, they consistently fail at mission-critical enterprise tasks in the MENA region. NerA-MCP provides:
 
-This MCP will **solve real Arabic pain points** that global MCP servers ignore.
+*   **Linguistic Precision**: Native dialect normalization (Gulf, Egyptian, Levantine) to MSA.
+*   **Enterprise Compliance**: Automated Sharia-compliance auditing and Hijri/Gregorian temporal synchronization.
+*   **Information Integrity**: Credibility scoring for Arabic news and social media chains.
+*   **Document Intelligence**: High-accuracy Arabic OCR with stamp and seal detection.
 
 ---
 
-## 1️⃣ Real pain points in the Middle East (Arabic-specific)
+## 🛠 Features & Capabilities
 
-These are **not solved well today**:
+### 🧠 Linguistic Intelligence
+*   **Dialect Normalization**: Context-aware transformation of regional dialects into Modern Standard Arabic.
+*   **Advanced Name Analysis**: intelligent parsing of compound Arabic names (e.g., merging "بن عبد الله") for KYC and legal matching.
 
-### 🧠 Linguistic
-
-* Dialects ≠ MSA (Egyptian, Gulf, Levant, Maghrebi)
-* Weak diacritics handling
-* Poor Arabic NER (names, tribes, places)
-* Arabic morphology breaks embeddings
-* RTL + mixed Arabic/English (Arabizi)
-
-### ⚖️ Legal & Religious
-
-* Islamic finance rules (Riba, Murabaha, Sukuk)
-* Sharia-compliant document validation
-* Fatwa-aware reasoning
-* Zakat calculations with context
-
-### 🏛️ Government & Enterprise
-
-* Arabic PDFs (scanned, stamped, handwritten)
-* Arabic IDs (National ID, Iqama, CR numbers)
-* Name normalization (محمد vs محمد بن)
-* Hijri ↔ Gregorian dates
+### 🏛 Enterprise & Legal
+*   **Sharia Compliance Engine**: Automated auditing of contracts against AAOIFI standards (Hanafi, Maliki, Hanbali schools).
+*   **Temporal Engine**: Bi-directional Hijri-Gregorian conversion optimized for legal and government date systems.
 
 ### 📰 Information Trust
-
-* Fake Arabic news detection
-* WhatsApp rumor chains
-* Source credibility in Arabic media
+*   **News Credibility Scoring**: Analysis of clickbait markers, source reputation, and sensationalism in Arabic media.
+*   **Document Extraction**: Robust OCR pipeline for scanned Iqamas, National IDs, and stamped certificates.
 
 ---
 
-## 2️⃣ Core idea: **MCP as Arabic Intelligence Layer**
+## 🏗 System Architecture
 
-Instead of “just tools”, your MCP becomes:
-
-> **An Arabic Cultural + Linguistic Runtime for LLMs**
-
----
-
-## 3️⃣ High-level architecture
-
-```
-┌────────────────────┐
-│   Any LLM          │
-│ (GPT / Claude /   │
-│  LLaMA / Qwen)    │
-└─────────┬──────────┘
-          │ MCP
-┌─────────▼──────────┐
-│ NerA MCP Server  │
-│ (Arabic-first)     │
-└─────────┬──────────┘
-          │
- ┌────────▼────────┐
- │ Dialect Engine  │
- │ Islamic Rules   │
- │ Arabic OCR      │
- │ NER & Names     │
- │ Date Systems    │
- │ Trust Scoring   │
- └─────────────────┘
+```mermaid
+graph TD
+    A[LLM: Claude/GPT/Qwen] -->|MCP Protocol| B[NerA-MCP Server]
+    B --> C{Intelligence Layer}
+    C --> D[Linguistic Engine]
+    C --> E[Compliance Engine]
+    C --> F[OCR/Vision Pipeline]
+    D -->|Dialects| G[MSA Output]
+    E -->|AAOIFI| H[Audit Report]
+    F -->|Tesseract| I[Structured Data]
 ```
 
 ---
 
-## 4️⃣ MCP Capabilities (this is where you win)
+## 📦 Installation & Setup
 
-### 🔹 1. Arabic Dialect Normalization Tool
+### For Developers (Local Setup)
 
-**Pain point:** Models misunderstand dialects.
+1.  **Environment Configuration**:
+    ```bash
+    conda create -y -n nera1 python=3.11
+    conda activate nera1
+    ```
 
-**Tool:**
+2.  **Install Dependencies**:
+    ```bash
+    pip install .
+    ```
 
-```json
-{
-  "name": "normalize_arabic_dialect",
-  "input": {
-    "text": "string",
-    "target": ["MSA", "GULF", "EGYPTIAN"]
-  }
-}
-```
+3.  **Deploy System-level OCR (Optional)**:
+    ```bash
+    sudo apt-get install tesseract-ocr
+    ```
 
-**Example:**
+### For Production (Docker)
 
-> "عايز أقدّم على قرض"
-
-→
-
-> "أرغب في التقدم بطلب قرض"
-
----
-
-### 🔹 2. Arabic Name Intelligence MCP
-
-**Pain point:** Names break KYC, fraud, legal matching.
-
-**Tool:**
-
-```json
-{
-  "name": "analyze_arabic_name",
-  "input": {
-    "name": "string"
-  }
-}
-```
-
-**Output:**
-
-```json
-{
-  "root_name": "محمد",
-  "lineage": ["بن عبد الله"],
-  "variants": ["محمد", "محمد بن عبدالله", "م. عبدالله"],
-  "confidence": 0.93
-}
-```
-
-💥 Huge for banks & governments.
-
----
-
-### 🔹 3. Islamic Finance Compliance Engine
-
-**Pain point:** LLMs hallucinate halal/haram.
-
-**Tool:**
-
-```json
-{
-  "name": "check_sharia_compliance",
-  "input": {
-    "contract_text": "string",
-    "school": ["Hanafi", "Maliki", "Hanbali"]
-  }
-}
-```
-
-**Output:**
-
-```json
-{
-  "status": "non-compliant",
-  "reasons": ["interest_clause_detected"],
-  "references": ["AAOIFI-Standard-21"]
-}
+NerA-MCP is fully containerized for reliable scaling:
+```bash
+docker-compose up --build -d
 ```
 
 ---
 
-### 🔹 4. Hijri–Gregorian Temporal Engine
+## 🔌 Integration
 
-**Pain point:** Dates break legal contracts.
-
-```json
-{
-  "name": "convert_hijri_date",
-  "input": {
-    "date": "1446-09-01",
-    "calendar": "Hijri"
-  }
-}
-```
-
----
-
-### 🔹 5. Arabic OCR + Semantic Cleanup
-
-**Pain point:** Stamps, seals, bad scans.
-
-```json
-{
-  "name": "extract_arabic_document",
-  "input": {
-    "file": "pdf",
-    "detect_stamps": true
-  }
-}
-```
-
----
-
-### 🔹 6. Arabic News Trust Scoring
-
-**Pain point:** Fake news spreads fast.
-
-```json
-{
-  "name": "arabic_news_credibility",
-  "input": {
-    "article_text": "string"
-  }
-}
-```
-
----
-
-## 5️⃣ MCP Resources (long-term value)
-
-### Resources exposed:
-
-* `resource://fatwas/AAOIFI`
-* `resource://arabic_names/saudi_registry`
-* `resource://dialects/gulf.yaml`
-* `resource://media_sources/trust_index.json`
-
-📌 These become **shared context** across all models.
-
----
-
-## 6️⃣ Why this is UNIQUE globally
-
-| Feature         | Global MCPs | NerA MCP |
-| --------------- | ----------- | ---------- |
-| Arabic dialects | ❌           | ✅          |
-| Islamic finance | ❌           | ✅          |
-| Hijri calendar  | ⚠️          | ✅          |
-| Arabic names    | ❌           | ✅          |
-| MENA compliance | ❌           | ✅          |
-
-This is **defensible IP**.
-
----
-
-## 7️⃣ Implementation roadmap (concrete)
-
-### Phase 1 – MVP (4–6 weeks)
-
-* MCP server (Python / FastAPI)
-* 3 tools:
-
-  * Dialect normalization
-  * Name analysis
-  * Hijri conversion
-* Static resources
-
-### Phase 2 – Enterprise
-
-* OCR pipeline
-* Sharia rule engine
-* Audit logs
-* Permissions
-
-### Phase 3 – Scale
-
-* Rust/Python hybrid 
-* On-prem deployment
-* Model-agnostic
-
----
-
-## 8️⃣ Tech stack (battle-tested)
-
-* **MCP Server:** Python + FastAPI
-* **NLP:** CAMeL Tools, Farasa, custom embeddings
-* **OCR:** Tesseract + LayoutLMv3
-* **Rules:** JSONLogic + AAOIFI corpus
-* **Storage:** DuckDB + FAISS
-* **Deployment:** Docker + K8s
-
----
-### 🔹 Installation
-
-1. Clone the repository:
-   ```bash
-   git clone <repo-url>
-   cd NerA
-   ```
-
-2. Create and set up the environment:
-   ```bash
-   conda create -y -n nera1 python=3.11
-   conda run -n nera1 pip install "mcp[cli]" hijridate camel-tools pydantic "fastapi>=0.109.0" "starlette>=0.36.0" "anyio>=4.0.0"
-   ```
-
-### 🔹 Using with Claude Desktop
-
-To use NerA-MCP in Claude Desktop, add the following to your `claude_desktop_config.json`:
-
-**macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
-**Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
+### Claude Desktop Configuration
+Add the following to your `claude_desktop_config.json`:
 
 ```json
 {
@@ -307,50 +100,44 @@ To use NerA-MCP in Claude Desktop, add the following to your `claude_desktop_con
         "-n",
         "nera1",
         "python",
-        "/absolute/path/to/NerA/ner_a_mcp/server.py"
+        "/home/mrazek/NerA/ner_a_mcp/server.py"
       ]
     }
   }
 }
 ```
 
-### 🔹 Running Manually
-```bash
-conda run -n nera1 python ner_a_mcp/server.py
-```
+---
 
+## 🌍 Distribution
+
+### Publish to PyPI
+This project is `pyproject.toml` compliant. To distribute:
+1.  **Build**: `python -m build`
+2.  **Upload**: `twine upload dist/*`
 
 ---
 
-## 🌍 Real-World Distribution & Deployment
-
-To take NerA-MCP to production or share it with the world, follow these strategies:
-
-### 🐳 1. Docker Deployment
-Docker is the standard for reliable, cross-platform deployment. It bundles all system dependencies like `tesseract`.
-
-```bash
-# Build the image
-docker build -t ner-a-mcp .
-
-# Run the container
-docker run -i ner-a-mcp
-```
-
-### ☁️ 2. Cloud Hosting (SSE Mode)
-While MCP often runs over `stdio` locally, for web-based AI clients or centralized teams, you can deploy as an **SSE (Server-Sent Events) Service**.
-
-1. Update `server.py` to use `mcp.run(transport='sse')`.
-2. Deploy the Docker container to **AWS Fargate**, **GCP Cloud Run**, or **Azure Container Apps**.
-3. Users connect via URL: `https://nera-mcp.your-domain.com/sse`
-
-### 🛡️ 3. Enterprise Security
-For real-world use, ensure:
-- **API Keys**: If exposing via SSE, add an authentication layer.
-- **Audit Logs**: Redirect logs to a central system (like ELK or CloudWatch).
-- **Rate Limiting**: Protect your server from abuse.
+## 🛡 Security & Observability
+*   **Logging**: Comprehensive logging via `sys.stdout` with standardized timestamps.
+*   **Error Handling**: Robust exception shielding to ensure the MCP server remains resilient under high load.
+*   **Auditability**: All tool invocations are logged for enterprise auditing.
 
 ---
 
-## 9️⃣ License
-MIT
+## 🤝 Contributing
+Contributions are welcome. Please ensure that all new tools include:
+1.  Comprehensive docstrings.
+2.  Input validation via Pydantic models.
+3.  Integration tests in `test_tools.py`.
+
+---
+
+## 📜 License
+Distributed under the **MIT License**. See `LICENSE` for more information.
+
+---
+
+<div align="center">
+  Made with ❤️ for the Arabic AI Ecosystem
+</div>
