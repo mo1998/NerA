@@ -2,7 +2,7 @@
 
 ---
 
-# 🇸🇦🇪🇬🇦🇪 **NerA-MCP (working name)**
+# **NerA-MCP**
 
 ### A Middle-East–native Model Context Protocol for Arabic-first AI systems
 
