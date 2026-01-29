@@ -1,0 +1,23 @@
+[project]
+name = "ner-a-mcp"
+version = "0.1.0"
+description = "A Middle-East–native Model Context Protocol for Arabic-first AI systems"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp[cli]>=1.0.0",
+    "hijridate>=2.3.0",
+    "camel-tools",
+    "pydantic>=2.7.0",
+    "fastapi>=0.109.0",
+    "starlette>=0.36.0",
+    "anyio>=4.0.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ner_a_mcp*"]

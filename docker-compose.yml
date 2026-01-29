@@ -1,0 +1,10 @@
+services:
+  ner-a-mcp:
+    build: .
+    container_name: ner-a-mcp
+    volumes:
+      - .:/app
+    environment:
+      - LOG_LEVEL=INFO
+    stdin_open: true
+    tty: true
