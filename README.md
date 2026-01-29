@@ -326,17 +326,7 @@ conda run -n nera1 python ner_a_mcp/server.py
 
 To take NerA-MCP to production or share it with the world, follow these strategies:
 
-### 📦 1. Publish to PyPI
-By publishing to PyPI, users can install your MCP with a single command:
-```bash
-pip install ner-a-mcp
-```
-**Steps:**
-1. Create a [PyPI account](https://pypi.org/).
-2. Build the package: `python -m build`
-3. Upload using Twine: `python -m twine upload dist/*`
-
-### 🐳 2. Docker Deployment
+### 🐳 1. Docker Deployment
 Docker is the standard for reliable, cross-platform deployment. It bundles all system dependencies like `tesseract`.
 
 ```bash
@@ -347,14 +337,14 @@ docker build -t ner-a-mcp .
 docker run -i ner-a-mcp
 ```
 
-### ☁️ 3. Cloud Hosting (SSE Mode)
+### ☁️ 2. Cloud Hosting (SSE Mode)
 While MCP often runs over `stdio` locally, for web-based AI clients or centralized teams, you can deploy as an **SSE (Server-Sent Events) Service**.
 
 1. Update `server.py` to use `mcp.run(transport='sse')`.
 2. Deploy the Docker container to **AWS Fargate**, **GCP Cloud Run**, or **Azure Container Apps**.
 3. Users connect via URL: `https://nera-mcp.your-domain.com/sse`
 
-### 🛡️ 4. Enterprise Security
+### 🛡️ 3. Enterprise Security
 For real-world use, ensure:
 - **API Keys**: If exposing via SSE, add an authentication layer.
 - **Audit Logs**: Redirect logs to a central system (like ELK or CloudWatch).
