@@ -6,6 +6,7 @@ from hijridate import Hijri, Gregorian
 from ner_a_mcp.logic.sharia import sharia_engine
 from ner_a_mcp.logic.trust import news_trust_engine
 from ner_a_mcp.logic.ocr import ocr_wrapper
+from ner_a_mcp.logic.dialects import dialect_engine
 
 import sys
 
@@ -102,38 +103,18 @@ async def analyze_arabic_name(name: str) -> dict:
     return res
 
 @mcp.tool()
-async def normalize_arabic_dialect(text: str, target: str = "MSA") -> str:
+async def normalize_arabic_dialect(text: str, target: str = "MSA") -> dict:
     """
-    Normalize Arabic dialect to Modern Standard Arabic (MSA) or another dialect.
+    Normalize Arabic dialect to Modern Standard Arabic (MSA) with confidence scoring.
     
-    :param text: Input Arabic text
+    :param text: Input Arabic text (e.g., Egyptian, Gulf)
     :param target: Target dialect (default: MSA)
-    :return: Normalized text
+    :return: Dictionary containing normalized_text, confidence, and metadata
     """
     logger.info(f"Normalizing text: {text} to {target}")
-    
-    # Expanded Phase 1+ mappings
-    mappings = {
-        "عايز": "أرغب",
-        "أقدّم": "التقدم",
-        "بدي": "أريد",
-        "شنو": "ماذا",
-        "وايد": "كثيراً",
-        "هون": "هنا",
-        "وين": "أين",
-        "إيش": "ماذا",
-        "شلونك": "كيف حالك",
-        "ماشي": "حسناً",
-        "قرض": "قرض"
-    }
-    
-    words = text.split()
-    normalized_words = []
-    for word in words:
-        # Simple word-level replacement
-        normalized_words.append(mappings.get(word, word))
-        
-    return " ".join(normalized_words)
+    res = dialect_engine.normalize(text, target)
+    logger.info(f"Normalization result: {res['normalized_text']} (Confidence: {res['confidence']})")
+    return res
 
 @mcp.tool()
 async def check_sharia_compliance(contract_text: str, school: str = "Hanafi") -> dict:
